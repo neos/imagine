@@ -1,13 +1,8 @@
-# TODO: add factory that creates concrete implementation (Gd vs Imagick vs Gmagick) depending on some setting
-
 Imagine\Image\ImagineInterface:
-  className: Imagine\Gd\Imagine
-  autowiring: off
+  factoryObjectName: Imagine\ImagineFactory
 
 Imagine\Image\ImageInterface:
-  className: Imagine\Gd\Image
-  autowiring: off
+  factoryObjectName: Imagine\ImageFactory
 
 Imagine\Image\FontInterface:
-  className: Imagine\Gd\Font
-  autowiring: off
+  factoryObjectName: Imagine\FontFactory
