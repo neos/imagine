@@ -11,6 +11,9 @@
 
 namespace Imagine\Image;
 
+/**
+ * An abstract font implementation
+ */
 abstract class AbstractFont implements FontInterface
 {
     /**

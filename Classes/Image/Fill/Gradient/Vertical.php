@@ -13,6 +13,9 @@ namespace Imagine\Image\Fill\Gradient;
 
 use Imagine\Image\PointInterface;
 
+/**
+ * A vertical gradient implementation
+ */
 final class Vertical extends Linear
 {
     /**

@@ -14,6 +14,9 @@ namespace Imagine\Image;
 use Imagine\Exception\InvalidArgumentException;
 use Imagine\Exception\RuntimeException;
 
+/**
+ * The Imagine interface
+ */
 interface ImagineInterface
 {
     /**

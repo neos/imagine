@@ -25,6 +25,9 @@ use Imagine\Exception\RuntimeException;
 use Imagine\Gd\Imagine;
 use Imagine\Mask\MaskInterface;
 
+/**
+ * Image implementation using the GD library
+ */
 final class Image implements ImageInterface
 {
     /**

@@ -34,6 +34,9 @@ use Imagine\Image\ManipulatorInterface;
 use Imagine\Image\Point;
 use Imagine\Image\PointInterface;
 
+/**
+ * A transformation filter
+ */
 final class Transformation implements FilterInterface, ManipulatorInterface
 {
     /**

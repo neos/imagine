@@ -15,6 +15,9 @@ use Imagine\Exception\InvalidArgumentException;
 use Imagine\Exception\OutOfBoundsException;
 use Imagine\Exception\RuntimeException;
 
+/**
+ * The Image interface
+ */
 interface ImageInterface extends ManipulatorInterface
 {
     /**

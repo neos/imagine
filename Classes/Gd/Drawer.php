@@ -20,6 +20,9 @@ use Imagine\Image\BoxInterface;
 use Imagine\Image\Color;
 use Imagine\Image\PointInterface;
 
+/**
+ * Drawer implementation using the GD library
+ */
 final class Drawer implements DrawerInterface
 {
     /**

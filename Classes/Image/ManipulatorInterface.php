@@ -16,6 +16,9 @@ use Imagine\Exception\OutOfBoundsException;
 use Imagine\Exception\RuntimeException;
 use Imagine\Image\Fill\FillInterface;
 
+/**
+ * A manipulator interface
+ */
 interface ManipulatorInterface
 {
     const THUMBNAIL_INSET    = 'inset';

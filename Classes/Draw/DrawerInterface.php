@@ -17,6 +17,9 @@ use Imagine\Image\Color;
 use Imagine\Image\PointInterface;
 use Imagine\Filter\FilterInterface;
 
+/**
+ * Interface the a Drawer
+ */
 interface DrawerInterface
 {
     /**

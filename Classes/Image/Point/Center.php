@@ -14,6 +14,9 @@ namespace Imagine\Image\Point;
 use Imagine\Image\BoxInterface;
 use Imagine\Image\PointInterface;
 
+/**
+ * A center implementation
+ */
 final class Center implements PointInterface
 {
     /**

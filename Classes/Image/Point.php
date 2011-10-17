@@ -13,6 +13,9 @@ namespace Imagine\Image;
 
 use Imagine\Exception\InvalidArgumentException;
 
+/**
+ * A point implementation
+ */
 final class Point implements PointInterface
 {
     /**

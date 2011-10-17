@@ -13,6 +13,9 @@ namespace Imagine\Filter;
 
 use Imagine\Image\ImageInterface;
 
+/**
+ * An interface for filters
+ */
 interface FilterInterface
 {
     /**

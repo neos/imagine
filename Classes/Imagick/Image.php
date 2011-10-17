@@ -26,6 +26,9 @@ use Imagine\Image\PointInterface;
 use Imagine\Image\ImageInterface;
 use Imagine\Mask\MaskInterface;
 
+/**
+ * Image implementation using the Imagick PHP extension
+ */
 final class Image implements ImageInterface
 {
     /**

@@ -11,6 +11,9 @@
 
 namespace Imagine\Image;
 
+/**
+ * A point interface
+ */
 interface PointInterface
 {
     /**

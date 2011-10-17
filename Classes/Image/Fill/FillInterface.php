@@ -13,6 +13,9 @@ namespace Imagine\Image\Fill;
 
 use Imagine\Image\PointInterface;
 
+/**
+ * A fill interface
+ */
 interface FillInterface
 {
     /**

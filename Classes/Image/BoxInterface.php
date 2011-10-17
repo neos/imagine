@@ -11,6 +11,9 @@
 
 namespace Imagine\Image;
 
+/**
+ * The Box interface
+ */
 interface BoxInterface
 {
     /**

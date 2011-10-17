@@ -11,6 +11,9 @@
 
 namespace Imagine\Image;
 
+/**
+ * The Font interface
+ */
 interface FontInterface
 {
     /**
