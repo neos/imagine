@@ -24,7 +24,6 @@ class ImageFactory extends AbstractImagineFactory {
 	 * Factory method which creates an Image instance.
 	 *
 	 * @return \Doctrine\ORM\EntityManager
-	 * @author Karsten Dambekalns <karsten@typo3.org>
 	 */
 	public function create() {
 		$implementationClassname = 'Imagine\\' . $this->settings['driver'] . '\Image';
