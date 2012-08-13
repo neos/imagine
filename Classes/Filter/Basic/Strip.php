@@ -11,16 +11,16 @@
 
 namespace Imagine\Filter\Basic;
 
-use Imagine\Filter\FilterInterface;
 use Imagine\Image\ImageInterface;
+use Imagine\Filter\FilterInterface;
 
-class Copy implements FilterInterface
+class Strip implements FilterInterface
 {
     /**
      * {@inheritdoc}
      */
     public function apply(ImageInterface $image)
     {
-        return $image->copy();
+        return $image->strip();
     }
 }

@@ -17,9 +17,6 @@ use Imagine\Image\ImagineInterface;
 use Imagine\Exception\InvalidArgumentException;
 use Imagine\Exception\RuntimeException;
 
-/**
- * Imagine implementation using the GD library
- */
 final class Imagine implements ImagineInterface
 {
     /**
@@ -41,7 +38,7 @@ final class Imagine implements ImagineInterface
     private $info;
 
     /**
-     * @throws Imagine\Exception\RuntimeException
+     * @throws RuntimeException
      */
     public function __construct()
     {
@@ -66,8 +63,7 @@ final class Imagine implements ImagineInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\ImagineInterface::create()
+     * {@inheritdoc}
      */
     public function create(BoxInterface $size, Color $color = null)
     {
@@ -81,141 +77,83 @@ final class Imagine implements ImagineInterface
         }
 
         $color = $color ? $color : new Color('fff');
-
-        if (false === imagealphablending($resource, false) ||
-            false === imagesavealpha($resource, true)) {
-            throw new RuntimeException(
-                'Could not set alphablending, savealpha and antialias values'
-            );
-        }
-
-        if (function_exists('imageantialias')) {
-            imageantialias($resource, true);
-        }
-
-        $color = imagecolorallocatealpha(
+        $index = imagecolorallocatealpha(
             $resource, $color->getRed(), $color->getGreen(), $color->getBlue(),
             round(127 * $color->getAlpha() / 100)
         );
 
-        if (false === $color) {
+        if (false === $index) {
             throw new RuntimeException('Unable to allocate color');
         }
 
-        if (false === imagefilledrectangle(
-            $resource, 0, 0, $width, $height, $color
-        )) {
+        if (false === imagefill($resource, 0, 0, $index)) {
             throw new RuntimeException('Could not set background color fill');
         }
 
-        return new Image($resource, $this);
+        if ($color->getAlpha() >= 95) {
+            imagecolortransparent($resource, $index);
+        }
+
+        return $this->wrap($resource);
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\ImagineInterface::open()
+     * {@inheritdoc}
      */
     public function open($path)
     {
-        if (!is_file($path)) {
+        $handle = @fopen($path, 'r');
+
+        if (false === $handle) {
             throw new InvalidArgumentException(sprintf(
                 'File %s doesn\'t exist', $path
             ));
         }
 
-        $info = getimagesize($path);
-
-        if (false === $info) {
-            throw new RuntimeException('Could not collect image metadata');
+        try {
+            $image = $this->read($handle);
+        } catch (\Exception $e) {
+            fclose($handle);
+            throw $e;
         }
 
-        list($width, $height, $type) = $info;
-
-        $format = $this->types[$type];
-
-        $supported = array(
-            'gif'  => 'GIF Read Support',
-            'jpeg' => 'JPEG Support',
-            'png'  => 'PNG Support',
-            'wbmp' => 'WBMP Support',
-            'xbm'  => 'XBM Support'
-        );
-
-        if (!$this->info[$supported[$format]]) {
-            throw new RuntimeException(sprintf(
-                'Installed version of GD doesn\'t support "%s" image format',
-                $format
-            ));
-        }
-
-        if (!function_exists('imagecreatefrom'.$format)) {
-            throw new InvalidArgumentException(
-                'Invalid image format specified, only "gif", "jpeg", "png", '.
-                '"wbmp", "xbm" images are supported'
-            );
-        }
-
-        $resource = call_user_func('imagecreatefrom'.$format, $path);
-
-        //Active in php development version 5.3, surelly true in 5.4
-        //Inactivate for compatibility
-        if( "gif" === $format and false){
-            $index = imagecolortransparent($resource);
-            if($index != (-1)){
-                $color = ImageColorsForIndex($resource, $index);
-                imagecolorset( $resource, $index, $color['red'], $color['green'], $color['blue'], 127 );
-            }
-        }
-
-        if (!is_resource($resource)) {
-            throw new RuntimeException(sprintf(
-                'File "%s" could not be opened', $path
-            ));
-        }
-
-        if (false === imagealphablending($resource, false) ||
-            false === imagesavealpha($resource, true)) {
-            throw new RuntimeException(
-                'Could not set alphablending, savealpha and antialias values'
-            );
-        }
-
-        if (function_exists('imageantialias')) {
-            imageantialias($resource, true);
-        }
-
-        return new Image($resource);
+        return $image;
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\ImagineInterface::load()
+     * {@inheritdoc}
      */
     public function load($string)
     {
-        $resource = imagecreatefromstring($string);
+        $resource = @imagecreatefromstring($string);
 
         if (!is_resource($resource)) {
             throw new InvalidArgumentException('An image could not be created from the given input');
         }
 
-        if (false === imagealphablending($resource, false) ||
-            false === imagesavealpha($resource, true)) {
-            throw new RuntimeException(
-                'Could not set alphablending, savealpha and antialias values'
-            );
-        }
-
-        if (function_exists('imageantialias')) {
-            imageantialias($resource, true);
-        }
-
-        return new Image($resource);
+        return $this->wrap($resource);
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\ImagineInterface::font()
+     * {@inheritdoc}
+     */
+    public function read($resource)
+    {
+        if (!is_resource($resource)) {
+            throw new InvalidArgumentException('Variable does not contain a stream resource');
+        }
+
+        $content = stream_get_contents($resource);
+
+        if (false === $content) {
+            throw new InvalidArgumentException('Cannot read resource content');
+        }
+
+        return $this->load($content);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function font($file, $size, Color $color)
     {
@@ -224,5 +162,37 @@ final class Imagine implements ImagineInterface
         }
 
         return new Font($file, $size, $color);
+    }
+
+    private function wrap($resource)
+    {
+        if (!imageistruecolor($resource)) {
+            list($width, $height) = array(imagesx($resource), imagesy($resource));
+
+            // create transparent truecolor canvas
+            $truecolor   = imagecreatetruecolor($width, $height);
+            $transparent = imagecolorallocatealpha($truecolor, 255, 255, 255, 127);
+
+            imagefill($truecolor, 0, 0, $transparent);
+            imagecolortransparent($truecolor, $transparent);
+
+            imagecopymerge($truecolor, $resource, 0, 0, 0, 0, $width, $height, 100);
+
+            imagedestroy($resource);
+            $resource = $truecolor;
+        }
+
+        if (false === imagealphablending($resource, false) ||
+            false === imagesavealpha($resource, true)) {
+            throw new RuntimeException(
+                'Could not set alphablending, savealpha and antialias values'
+            );
+        }
+
+        if (function_exists('imageantialias')) {
+            imageantialias($resource, true);
+        }
+
+        return new Image($resource);
     }
 }

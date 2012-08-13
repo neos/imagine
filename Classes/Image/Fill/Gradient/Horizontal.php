@@ -13,14 +13,10 @@ namespace Imagine\Image\Fill\Gradient;
 
 use Imagine\Image\PointInterface;
 
-/**
- * A horizontal gradient implementation
- */
 final class Horizontal extends Linear
 {
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Mask\Gradient\Linear::getDistance()
+     * {@inheritdoc}
      */
     public function getDistance(PointInterface $position)
     {

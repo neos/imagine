@@ -11,13 +11,10 @@
 
 namespace Imagine\Image\Histogram;
 
-/**
- * A histogram bucket implementation
- */
 final class Bucket implements \Countable
 {
     /**
-     * @var Imagine\Image\Histogram\Range
+     * @var Range
      */
     private $range;
 
@@ -27,8 +24,8 @@ final class Bucket implements \Countable
     private $count;
 
     /**
-     * @param Imagine\Image\Histogram\Range $range
-     * @param integer                       $count
+     * @param Range   $range
+     * @param integer $count
      */
     public function __construct(Range $range, $count = 0)
     {
@@ -47,8 +44,7 @@ final class Bucket implements \Countable
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Countable::count()
+     * @return integer The number of elements in the bucket.
      */
     public function count()
     {

@@ -15,9 +15,6 @@ use Imagine\Image\Color;
 use Imagine\Image\Fill\FillInterface;
 use Imagine\Image\PointInterface;
 
-/**
- * A linear gradient implementation
- */
 abstract class Linear implements FillInterface
 {
     /**
@@ -26,12 +23,12 @@ abstract class Linear implements FillInterface
     private $length;
 
     /**
-     * @var Imagine\Image\Color
+     * @var Color
      */
     private $start;
 
     /**
-     * @var Imagine\Image\Color
+     * @var Color
      */
     private $end;
 
@@ -39,9 +36,9 @@ abstract class Linear implements FillInterface
      * Constructs a linear gradient with overall gradient length, and start and
      * end shades, which default to 0 and 255 accordingly
      *
-     * @param integer             $length
-     * @param Imagine\Image\Color $start
-     * @param Imagine\Image\Color $end
+     * @param integer $length
+     * @param Color   $start
+     * @param Color   $end
      */
     final public function __construct($length, Color $start, Color $end)
     {
@@ -51,8 +48,7 @@ abstract class Linear implements FillInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\Fill\FillInterface::getShade()
+     * {@inheritdoc}
      */
     final public function getColor(PointInterface $position)
     {
@@ -78,7 +74,7 @@ abstract class Linear implements FillInterface
     }
 
     /**
-     * @return Imagine\Image\Color
+     * @return Color
      */
     final public function getStart()
     {
@@ -86,7 +82,7 @@ abstract class Linear implements FillInterface
     }
 
     /**
-     * @return Imagine\Image\Color
+     * @return Color
      */
     final public function getEnd()
     {
@@ -96,7 +92,7 @@ abstract class Linear implements FillInterface
     /**
      * Get the distance of the position relative to the beginning of the gradient
      *
-     * @param Imagine\Image\PointInterface $position
+     * @param PointInterface $position
      *
      * @return integer
      */

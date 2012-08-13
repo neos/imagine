@@ -15,18 +15,15 @@ use Imagine\Filter\FilterInterface;
 use Imagine\Image\Fill\FillInterface;
 use Imagine\Image\ImageInterface;
 
-/**
- * A fill filter
- */
 class Fill implements FilterInterface
 {
     /**
-     * @var Imagine\Image\Fill\FillInterface
+     * @var FillInterface
      */
     private $fill;
 
     /**
-     * @param Imagine\Image\Fill\FillInterface $fill
+     * @param FillInterface $fill
      */
     public function __construct(FillInterface $fill)
     {
@@ -34,8 +31,7 @@ class Fill implements FilterInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Filter\FilterInterface::apply()
+     * {@inheritdoc}
      */
     public function apply(ImageInterface $image)
     {

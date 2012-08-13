@@ -13,9 +13,6 @@ namespace Imagine\Image;
 
 use Imagine\Exception\InvalidArgumentException;
 
-/**
- * A point implementation
- */
 final class Point implements PointInterface
 {
     /**
@@ -34,7 +31,7 @@ final class Point implements PointInterface
      * @param integer $x
      * @param integer $y
      *
-     * @throws Imagine\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct($x, $y)
     {
@@ -49,8 +46,7 @@ final class Point implements PointInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\PointInterface::getX()
+     * {@inheritdoc}
      */
     public function getX()
     {
@@ -58,8 +54,7 @@ final class Point implements PointInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\PointInterface::getY()
+     * {@inheritdoc}
      */
     public function getY()
     {
@@ -67,8 +62,7 @@ final class Point implements PointInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\PointInterface::in()
+     * {@inheritdoc}
      */
     public function in(BoxInterface $box)
     {
@@ -76,8 +70,15 @@ final class Point implements PointInterface
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Imagine\Image\PointInterface::__toString()
+     * {@inheritdoc}
+     */
+    public function move($amount)
+    {
+        return new Point($this->x + $amount, $this->y + $amount);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function __toString()
     {
