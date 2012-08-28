@@ -1,8 +1,2 @@
 Imagine\Image\ImagineInterface:
   factoryObjectName: Imagine\ImagineFactory
-
-Imagine\Image\ImageInterface:
-  factoryObjectName: Imagine\ImageFactory
-
-Imagine\Image\FontInterface:
-  factoryObjectName: Imagine\FontFactory

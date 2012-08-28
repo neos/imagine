@@ -30,6 +30,7 @@ class AbstractImagineFactory {
 	 *
 	 * @param array $settings
 	 * @return void
+	 * @throws \InvalidArgumentException
 	 */
 	public function injectSettings(array $settings) {
 		$this->settings = $settings;
