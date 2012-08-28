@@ -23,11 +23,11 @@ class FontFactory extends AbstractImagineFactory {
 	/**
 	 * Factory method which creates a Font instance.
 	 *
-	 * @return \Doctrine\ORM\EntityManager
+	 * @return \Imagine\Image\FontInterface
 	 */
 	public function create() {
-		$implementationClassname = 'Imagine\\' . $this->settings['driver'] . '\Font';
-		return new $implementationClassname();
+		$implementationClassName = 'Imagine\\' . $this->settings['driver'] . '\Font';
+		return new $implementationClassName();
 	}
 
 }

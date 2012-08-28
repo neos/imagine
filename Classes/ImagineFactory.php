@@ -23,11 +23,11 @@ class ImagineFactory extends AbstractImagineFactory {
 	/**
 	 * Factory method which creates an Imagine instance.
 	 *
-	 * @return \Doctrine\ORM\EntityManager
+	 * @return \Imagine\Image\ImagineInterface
 	 */
 	public function create() {
-		$implementationClassname = 'Imagine\\' . $this->settings['driver'] . '\Imagine';
-		return new $implementationClassname();
+		$implementationClassName = 'Imagine\\' . $this->settings['driver'] . '\Imagine';
+		return new $implementationClassName();
 	}
 
 }
