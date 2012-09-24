@@ -1,0 +1,15 @@
+{
+    "name": "typo3/imagine",
+    "type": "flow3-package",
+    "description": "",
+    "version": "",
+    "require": {
+        "typo3/flow3": "*",
+        "imagine/imagine": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "TYPO3\\Imagine": "Classes"
+        }
+    }
+}

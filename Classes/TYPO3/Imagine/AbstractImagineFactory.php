@@ -1,8 +1,8 @@
 <?php
-namespace Imagine;
+namespace TYPO3\Imagine;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "Imagine".                    *
+ * This script belongs to the FLOW3 package "TYPO3.Imagine".              *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License, either version 3   *
