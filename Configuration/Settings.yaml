@@ -1,7 +1,7 @@
 TYPO3:
   Imagine:
     driver: 'Gd'
-  FLOW3:
+  Flow:
     object:
       excludeClasses:
        'imagine.Imagine' : ['Imagine\\Test\\.*']
