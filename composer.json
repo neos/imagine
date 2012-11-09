@@ -5,7 +5,7 @@
     "version": "",
     "require": {
         "typo3/flow": "*",
-        "imagine/imagine": "*"
+        "imagine/Imagine": "*"
     },
     "autoload": {
         "psr-0": {
