@@ -4,4 +4,4 @@ TYPO3:
   Flow:
     object:
       excludeClasses:
-       'imagine.Imagine' : ['Imagine\\Test\\.*']
+       'imagine.imagine': ['Imagine\\Test\\.*']
