@@ -21,13 +21,42 @@ use TYPO3\Flow\Annotations as Flow;
 class ImagineFactory extends AbstractImagineFactory {
 
 	/**
+	 * @var \TYPO3\Flow\Object\ObjectManagerInterface
+	 * @Flow\Inject
+	 */
+	protected $objectManager;
+
+	/**
 	 * Factory method which creates an Imagine instance.
 	 *
+	 * By default this factory creates an Imagine service according to the currently configured driver (for example GD
+	 * or ImageMagick).
+	 *
+	 * You may alternatively specify a class name of a driver-dependent class you need an instance of. For example,
+	 * specifying "Image" with the currently configured driver "Gd" will return an instance of the class
+	 * \Imagine\Gd\Image.
+	 *
+	 * @param string $className If specified, this factory will create an instance of the driver dependent class
 	 * @return \Imagine\Image\ImagineInterface
+	 * @api
 	 */
-	public function create() {
-		$implementationClassName = 'Imagine\\' . $this->settings['driver'] . '\Imagine';
-		return new $implementationClassName();
+	public function create($className = 'Imagine') {
+		$className = 'Imagine\\' . $this->settings['driver'] . '\\' . $className;
+		$arguments = array_slice(func_get_args(), 1);
+
+		switch (count($arguments)) {
+			case 0: $object = new $className(); break;
+			case 1: $object = new $className($arguments[0]); break;
+			case 2: $object = new $className($arguments[0], $arguments[1]); break;
+			case 3: $object = new $className($arguments[0], $arguments[1], $arguments[2]); break;
+			case 4: $object = new $className($arguments[0], $arguments[1], $arguments[2], $arguments[3]); break;
+			case 5: $object = new $className($arguments[0], $arguments[1], $arguments[2], $arguments[3], $arguments[4]); break;
+			case 6: $object = new $className($arguments[0], $arguments[1], $arguments[2], $arguments[3], $arguments[4], $arguments[5]); break;
+			default:
+				$class = new \ReflectionClass($className);
+				$object =  $class->newInstanceArgs($arguments);
+		}
+		return $object;
 	}
 
 }
