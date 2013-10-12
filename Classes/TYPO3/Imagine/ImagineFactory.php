@@ -60,5 +60,3 @@ class ImagineFactory extends AbstractImagineFactory {
 	}
 
 }
-
-?>
