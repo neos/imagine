@@ -1,0 +1,3 @@
+type: string
+required: TRUE
+enum: [ 'Gd', 'Imagick', 'Gmagick' ]

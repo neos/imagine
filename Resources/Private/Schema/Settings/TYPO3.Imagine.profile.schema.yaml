@@ -1,0 +1,7 @@
+type: dictionary
+additionalProperties: FALSE
+properties:
+  'RGB': { type: string, required: TRUE }
+  'CMYK': { type: string, required: TRUE }
+  'Grayscale': { type: string, required: TRUE }
+
