@@ -71,16 +71,36 @@ class PaletteInterfaceAspect {
 	protected function profile(JoinPointInterface $joinPoint, $profilePath) {
 		/** @var PaletteInterface $proxy */
 		$proxy = $joinPoint->getProxy();
-		$profile = ObjectAccess::getProperty($proxy, 'profile', TRUE);
+
+		try {
+			$profile = ObjectAccess::getProperty($proxy, 'profile', TRUE);
+		} catch (\Exception $exception) {
+			// Getting the profile will fail on the CMYK palette as the profile property is private and as the class
+			// has to be reflected this private property will be on the _Original class and not on the proxy class and
+			// is as such not accessible for property_exists in ObjectAccess::getProperty
+			// @see NEOS-423
+			return $this->createAndSetProfileOnProxy($proxy, $profilePath);
+		}
+
 		if (!$profile instanceof ProfileInterface) {
-			if (substr($profilePath, 0, 11) !== 'resource://') {
-				$profilePath = $this->packageManager->getPackage('imagine.imagine')->getPackagePath() . 'lib/Imagine/resources/' . $profilePath;
-			}
-			$profile = Profile::fromPath($profilePath);
-			ObjectAccess::setProperty($proxy, 'profile', $profile, TRUE);
+			$profile = $this->createAndSetProfileOnProxy($proxy, $profilePath);
 		}
 
 		return $profile;
 	}
 
+	/**
+	 * @param PaletteInterface $proxy
+	 * @param $profilePath
+	 * @return \Imagine\Image\Profile
+	 */
+	protected function createAndSetProfileOnProxy(PaletteInterface $proxy, $profilePath) {
+		if (substr($profilePath, 0, 11) !== 'resource://') {
+			$profilePath = $this->packageManager->getPackage('imagine.imagine')->getPackagePath() . 'lib/Imagine/resources/' . $profilePath;
+		}
+		$profile = Profile::fromPath($profilePath);
+		ObjectAccess::setProperty($proxy, 'profile', $profile, TRUE);
+
+		return $profile;
+	}
 }
