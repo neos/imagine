@@ -31,7 +31,7 @@ class PaletteInterfaceAspect {
 	protected $packageManager;
 
 	/**
-	 * @Flow\Inject(setting="profile")
+	 * @Flow\InjectConfiguration("profile")
 	 * @var array
 	 */
 	protected $profiles = array();
