@@ -21,7 +21,7 @@ use TYPO3\Flow\Annotations as Flow;
 class ImagineFactory extends AbstractImagineFactory {
 
 	/**
-	 * @var \TYPO3\Flow\Object\ObjectManagerInterface
+	 * @var \TYPO3\Flow\ObjectManagement\ObjectManagerInterface
 	 * @Flow\Inject
 	 */
 	protected $objectManager;
