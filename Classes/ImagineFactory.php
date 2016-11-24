@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\Imagine;
+namespace Neos\Imagine;
 
 /*                                                                        *
  * This script belongs to the TYPO3 Flow package "Imagine".               *

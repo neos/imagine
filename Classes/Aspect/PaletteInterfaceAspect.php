@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\Imagine\Aspect;
+namespace Neos\Imagine\Aspect;
 
 /*                                                                        *
  * This script belongs to the TYPO3 Flow package "Imagine".               *
