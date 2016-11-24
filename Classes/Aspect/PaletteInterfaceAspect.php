@@ -17,7 +17,7 @@ use Imagine\Image\ProfileInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\AOP\JoinPointInterface;
 use Neos\Flow\Package\PackageManagerInterface;
-use Neos\Flow\Reflection\ObjectAccess;
+use Neos\Utility\ObjectAccess;
 
 /**
  * @Flow\Aspect
