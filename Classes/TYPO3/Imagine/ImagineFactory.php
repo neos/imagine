@@ -11,7 +11,7 @@ namespace TYPO3\Imagine;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * Imagine factory for Imagine package
@@ -21,7 +21,7 @@ use TYPO3\Flow\Annotations as Flow;
 class ImagineFactory extends AbstractImagineFactory {
 
 	/**
-	 * @var \TYPO3\Flow\ObjectManagement\ObjectManagerInterface
+	 * @var \Neos\Flow\ObjectManagement\ObjectManagerInterface
 	 * @Flow\Inject
 	 */
 	protected $objectManager;

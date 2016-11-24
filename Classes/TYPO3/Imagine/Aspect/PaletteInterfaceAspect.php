@@ -14,10 +14,10 @@ namespace TYPO3\Imagine\Aspect;
 use Imagine\Image\Palette\PaletteInterface;
 use Imagine\Image\Profile;
 use Imagine\Image\ProfileInterface;
-use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\AOP\JoinPointInterface;
-use TYPO3\Flow\Package\PackageManagerInterface;
-use TYPO3\Flow\Reflection\ObjectAccess;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\AOP\JoinPointInterface;
+use Neos\Flow\Package\PackageManagerInterface;
+use Neos\Flow\Reflection\ObjectAccess;
 
 /**
  * @Flow\Aspect
