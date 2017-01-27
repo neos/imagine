@@ -2,7 +2,7 @@
     "name": "neos/imagine",
     "type": "neos-package",
     "description": "",
-    "license": "GPL-3.0+",
+    "license": "MIT",
     "require": {
         "neos/flow": "*",
         "imagine/Imagine": "0.6.*"
