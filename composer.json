@@ -4,7 +4,7 @@
     "description": "",
     "license": "MIT",
     "require": {
-        "neos/flow": "*",
+        "neos/flow": "~4.0 || dev-master",
         "imagine/Imagine": "0.6.*"
     },
     "replace": {
