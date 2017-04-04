@@ -1,42 +1,42 @@
 <?php
 namespace TYPO3\Imagine;
 
-/*                                                                        *
- * This script belongs to the TYPO3 Flow package "Imagine".               *
- *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU Lesser General Public License, either version 3   *
- * of the License, or (at your option) any later version.                 *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
- *                                                                        */
+/*
+ * This file is part of the TYPO3.Imagine package.
+ *
+ * (c) Contributors of the Neos Project - www.neos.io
+ *
+ * This package is Open Source Software. For the full copyright and license
+ * information, please view the LICENSE file which was distributed with this
+ * source code.
+ */
 
 use TYPO3\Flow\Annotations as Flow;
 
 /**
- * Abstract factory for Imagine package
+ * Abstract factory for Imagine package.
  *
  * @Flow\Scope("singleton")
  */
-class AbstractImagineFactory {
+class AbstractImagineFactory
+{
+    /**
+     * @var array
+     */
+    protected $settings = [];
 
-	/**
-	 * @var array
-	 */
-	protected $settings = array();
-
-	/**
-	 * Injects the settings.
-	 *
-	 * @param array $settings
-	 * @return void
-	 * @throws \InvalidArgumentException
-	 */
-	public function injectSettings(array $settings) {
-		$this->settings = $settings;
-		if (!in_array($settings['driver'], array('Gd', 'Imagick', 'Gmagick'), TRUE)) {
-			throw new \InvalidArgumentException('The "driver" setting for Imagine must be one of Gd, Imagick, Gmagick.', 1316887156);
-		}
-	}
-
+    /**
+     * Injects the settings.
+     *
+     * @param array $settings
+     * @return void
+     * @throws \InvalidArgumentException
+     */
+    public function injectSettings(array $settings)
+    {
+        $this->settings = $settings;
+        if (!in_array($settings['driver'], ['Gd', 'Imagick', 'Gmagick'], true)) {
+            throw new \InvalidArgumentException('The "driver" setting for Imagine must be one of Gd, Imagick, Gmagick.', 1316887156);
+        }
+    }
 }
