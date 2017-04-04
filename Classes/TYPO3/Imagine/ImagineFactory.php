@@ -63,7 +63,9 @@ class ImagineFactory extends AbstractImagineFactory {
 	}
 
 	/**
-	 * Set driver specific settings.
+	 * Set driver specific settings.	 
+	 *
+	 * @return void
 	 */
 	protected function configureDriverSpecificSettings() {
 		if ($this->settings['driver'] === 'Imagick') {
@@ -73,6 +75,8 @@ class ImagineFactory extends AbstractImagineFactory {
 
 	/**
 	 * Sets limits for the Imagick driver.
+	 *
+	 * @return void
 	 */
 	protected function configureImagickSettings() {
 		if (!isset($this->settings['driverSpecific']['Imagick'])) {
