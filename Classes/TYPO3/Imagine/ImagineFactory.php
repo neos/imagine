@@ -41,6 +41,8 @@ class ImagineFactory extends AbstractImagineFactory {
 	 * @api
 	 */
 	public function create($className = 'Imagine') {
+		$this->configureDriverSpecificSettings();
+
 		$className = 'Imagine\\' . $this->settings['driver'] . '\\' . $className;
 		$arguments = array_slice(func_get_args(), 1);
 
@@ -56,7 +58,30 @@ class ImagineFactory extends AbstractImagineFactory {
 				$class = new \ReflectionClass($className);
 				$object =  $class->newInstanceArgs($arguments);
 		}
+
 		return $object;
 	}
 
+	/**
+	 * Set driver specific settings.
+	 */
+	protected function configureDriverSpecificSettings() {
+		if ($this->settings['driver'] === 'Imagick') {
+			$this->configureImagickSettings();
+		}
+	}
+
+	/**
+	 * Sets limits for the Imagick driver.
+	 */
+	protected function configureImagickSettings() {
+		if (!isset($this->settings['driverSpecific']['Imagick'])) {
+			return;
+		}
+
+		$limits = $this->settings['driverSpecific']['Imagick']['limits'] ?? [];
+		foreach ($limits as $resourceType => $limit) {
+			\Imagick::setResourceLimit($resourceType, $limit);
+		}
+	}
 }
