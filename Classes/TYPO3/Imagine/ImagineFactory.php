@@ -20,34 +20,34 @@ use TYPO3\Flow\Annotations as Flow;
  */
 class ImagineFactory extends AbstractImagineFactory
 {
-	/**
+    /**
      * @Flow\Inject
-	 * @var \TYPO3\Flow\Object\ObjectManagerInterface
-	 */
-	protected $objectManager;
+     * @var \TYPO3\Flow\Object\ObjectManagerInterface
+     */
+    protected $objectManager;
 
-	/**
-	 * Factory method which creates an Imagine instance.
-	 *
-	 * By default this factory creates an Imagine service according to the currently configured driver (for example GD
-	 * or ImageMagick).
-	 *
-	 * You may alternatively specify a class name of a driver-dependent class you need an instance of. For example,
-	 * specifying "Image" with the currently configured driver "Gd" will return an instance of the class
-	 * \Imagine\Gd\Image.
-	 *
-	 * @param string $className If specified, this factory will create an instance of the driver dependent class
-	 * @return \Imagine\Image\ImagineInterface
-	 * @api
-	 */
+    /**
+     * Factory method which creates an Imagine instance.
+     *
+     * By default this factory creates an Imagine service according to the currently configured driver (for example GD
+     * or ImageMagick).
+     *
+     * You may alternatively specify a class name of a driver-dependent class you need an instance of. For example,
+     * specifying "Image" with the currently configured driver "Gd" will return an instance of the class
+     * \Imagine\Gd\Image.
+     *
+     * @param string $className If specified, this factory will create an instance of the driver dependent class
+     * @return \Imagine\Image\ImagineInterface
+     * @api
+     */
     public function create($className = 'Imagine')
     {
-		$this->configureDriverSpecificSettings();
+        $this->configureDriverSpecificSettings();
 
-		$className = 'Imagine\\' . $this->settings['driver'] . '\\' . $className;
-		$arguments = array_slice(func_get_args(), 1);
+        $className = 'Imagine\\' . $this->settings['driver'] . '\\' . $className;
+        $arguments = array_slice(func_get_args(), 1);
 
-		switch (count($arguments)) {
+        switch (count($arguments)) {
             case 0:
                 $object = new $className();
                 break;
@@ -69,38 +69,38 @@ class ImagineFactory extends AbstractImagineFactory
             case 6:
                 $object = new $className($arguments[0], $arguments[1], $arguments[2], $arguments[3], $arguments[4], $arguments[5]);
                 break;
-			default:
-				$class = new \ReflectionClass($className);
+            default:
+                $class = new \ReflectionClass($className);
                 $object = $class->newInstanceArgs($arguments);
-		}
+        }
 
-		return $object;
-	}
+        return $object;
+    }
 
-	/**
-	 * Set driver specific settings.	 
-	 *
-	 * @return void
-	 */
-	protected function configureDriverSpecificSettings() {
-		if ($this->settings['driver'] === 'Imagick') {
-			$this->configureImagickSettings();
-		}
-	}
+    /**
+     * Set driver specific settings.     
+     *
+     * @return void
+     */
+    protected function configureDriverSpecificSettings() {
+        if ($this->settings['driver'] === 'Imagick') {
+            $this->configureImagickSettings();
+        }
+    }
 
-	/**
-	 * Sets limits for the Imagick driver.
-	 *
-	 * @return void
-	 */
-	protected function configureImagickSettings() {
-		if (!isset($this->settings['driverSpecific']['Imagick'])) {
-			return;
-		}
+    /**
+     * Sets limits for the Imagick driver.
+     *
+     * @return void
+     */
+    protected function configureImagickSettings() {
+        if (!isset($this->settings['driverSpecific']['Imagick'])) {
+            return;
+        }
 
-		$limits = $this->settings['driverSpecific']['Imagick']['limits'] ?? [];
-		foreach ($limits as $resourceType => $limit) {
-			\Imagick::setResourceLimit($resourceType, $limit);
-		}
-	}
+        $limits = $this->settings['driverSpecific']['Imagick']['limits'] ?? [];
+        foreach ($limits as $resourceType => $limit) {
+            \Imagick::setResourceLimit($resourceType, $limit);
+        }
+    }
 }
