@@ -98,7 +98,7 @@ class ImagineFactory extends AbstractImagineFactory
             return;
         }
 
-        $limits = $this->settings['driverSpecific']['Imagick']['limits'] ?? [];
+        $limits = $this->settings['driverSpecific']['Imagick']['limits'] ? $this->settings['driverSpecific']['Imagick']['limits'] : [];
         foreach ($limits as $resourceType => $limit) {
             \Imagick::setResourceLimit($resourceType, $limit);
         }
