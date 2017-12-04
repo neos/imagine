@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "neos/flow": "~4.0 || dev-master",
-        "imagine/Imagine": "0.6.*"
+        "imagine/Imagine": "^0.7.1"
     },
     "replace": {
         "typo3/imagine": "self.version"
