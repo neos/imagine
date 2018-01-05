@@ -1,4 +1,5 @@
 <?php
+
 namespace Neos\Imagine;
 
 /*
@@ -18,25 +19,26 @@ use Neos\Flow\Annotations as Flow;
  *
  * @Flow\Scope("singleton")
  */
-class AbstractImagineFactory {
+class AbstractImagineFactory
+{
 
-	/**
-	 * @var array
-	 */
-	protected $settings = array();
+    /**
+     * @var array
+     */
+    protected $settings = [];
 
-	/**
-	 * Injects the settings.
-	 *
-	 * @param array $settings
-	 * @return void
-	 * @throws \InvalidArgumentException
-	 */
-	public function injectSettings(array $settings) {
-		$this->settings = $settings;
-		if (!in_array($settings['driver'], array('Gd', 'Imagick', 'Gmagick'), TRUE)) {
-			throw new \InvalidArgumentException('The "driver" setting for Imagine must be one of Gd, Imagick, Gmagick.', 1316887156);
-		}
-	}
-
+    /**
+     * Injects the settings.
+     *
+     * @param array $settings
+     * @return void
+     * @throws \InvalidArgumentException
+     */
+    public function injectSettings(array $settings)
+    {
+        $this->settings = $settings;
+        if (!in_array($settings['driver'], \array_keys(\array_filter($settings['enabledDrivers'])), true)) {
+            throw new \InvalidArgumentException('The "driver" setting for Imagine must enable by setting, check Neos.Imagine.enabledDrivers.', 1316887156);
+        }
+    }
 }
