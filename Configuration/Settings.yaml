@@ -1,6 +1,10 @@
 Neos:
   Imagine:
     driver: 'Gd'
+    enabledDrivers:
+      Gd: true
+      Imagick: true
+      Gmagick: true
     profile:
       'RGB': 'color.org/sRGB_IEC61966-2-1_black_scaled.icc'
       'CMYK': 'Adobe/CMYK/USWebUncoated.icc'
