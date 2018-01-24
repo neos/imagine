@@ -9,3 +9,9 @@ Neos:
       'RGB': 'color.org/sRGB_IEC61966-2-1_black_scaled.icc'
       'CMYK': 'Adobe/CMYK/USWebUncoated.icc'
       'Grayscale': 'colormanagement.org/ISOcoated_v2_grey1c_bas.ICC'
+    driverSpecific:
+      Imagick:
+        # define a map of limits, where the key is an int (one of the "Imagick::RESOURCETYPE_*" constants)
+        # and the value is the limit in bytes for that resource.
+        # For details see \Imagick::setResourceLimit()
+        limits: []
