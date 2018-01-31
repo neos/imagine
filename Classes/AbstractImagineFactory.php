@@ -19,7 +19,8 @@ use Neos\Flow\Annotations as Flow;
  *
  * @Flow\Scope("singleton")
  */
-class AbstractImagineFactory {
+class AbstractImagineFactory
+{
 
     /**
      * @var array
@@ -33,7 +34,8 @@ class AbstractImagineFactory {
      * @return void
      * @throws \InvalidArgumentException
      */
-    public function injectSettings(array $settings) {
+    public function injectSettings(array $settings)
+    {
         $this->settings = \array_merge($this->settings, $settings);
         if (!array_key_exists($this->settings['driver'], array_filter($this->settings['enabledDrivers']))) {
             throw new \InvalidArgumentException('The "driver" setting for Imagine must enable by setting, check Neos.Imagine.enabledDrivers.', 1515402616);
