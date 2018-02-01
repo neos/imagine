@@ -36,8 +36,11 @@ class AbstractImagineFactory
     public function injectSettings(array $settings)
     {
         $this->settings = $settings;
+        if (!isset($settings['enabledDrivers'])) {
+            return;
+        }
         if (!in_array($settings['driver'], array_keys(array_filter($settings['enabledDrivers'])), true)) {
-            throw new \InvalidArgumentException('The "driver" setting for Imagine must enable by setting, check Neos.Imagine.enabledDrivers.', 1515402616);
+            throw new \InvalidArgumentException('The "driver" for Imagine must be enabled by settings, check Neos.Imagine.enabledDrivers.', 1515402616);
         }
     }
 }
