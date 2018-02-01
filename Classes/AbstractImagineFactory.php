@@ -37,7 +37,7 @@ class AbstractImagineFactory
     {
         $this->settings = \array_merge($this->settings, $settings);
         if (!array_key_exists($this->settings['driver'], array_filter($this->settings['enabledDrivers']))) {
-            throw new \InvalidArgumentException('The "driver" setting for Imagine must enable by setting, check Neos.Imagine.enabledDrivers.', 1515402616);
+            throw new \InvalidArgumentException('The "driver" for Imagine must be enabled by settings, check Neos.Imagine.enabledDrivers.', 1515402616);
         }
     }
 }
