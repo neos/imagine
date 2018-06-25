@@ -20,7 +20,6 @@ use Neos\Flow\Annotations as Flow;
  */
 class ImagineFactory extends AbstractImagineFactory
 {
-
     /**
      * @var \Neos\Flow\ObjectManagement\ObjectManagerInterface
      * @Flow\Inject
@@ -39,6 +38,7 @@ class ImagineFactory extends AbstractImagineFactory
      *
      * @param string $className If specified, this factory will create an instance of the driver dependent class
      * @return \Imagine\Image\ImagineInterface
+     * @throws \ReflectionException
      * @api
      */
     public function create($className = 'Imagine')
@@ -60,6 +60,7 @@ class ImagineFactory extends AbstractImagineFactory
                 $class = new \ReflectionClass($className);
                 $object =  $class->newInstanceArgs($arguments);
         }
+
         return $object;
     }
 
@@ -68,7 +69,8 @@ class ImagineFactory extends AbstractImagineFactory
      *
      * @return void
      */
-    protected function configureDriverSpecificSettings() {
+    protected function configureDriverSpecificSettings()
+    {
         if ($this->settings['driver'] === 'Imagick') {
             $this->configureImagickSettings();
         }
@@ -79,7 +81,8 @@ class ImagineFactory extends AbstractImagineFactory
      *
      * @return void
      */
-    protected function configureImagickSettings() {
+    protected function configureImagickSettings()
+    {
         if (!isset($this->settings['driverSpecific']['Imagick'])) {
             return;
         }
