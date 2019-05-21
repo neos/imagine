@@ -16,7 +16,7 @@ use Imagine\Image\Profile;
 use Imagine\Image\ProfileInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\AOP\JoinPointInterface;
-use Neos\Flow\Package\PackageManagerInterface;
+use Neos\Flow\Package\PackageManager;
 use Neos\Utility\ObjectAccess;
 
 /**
@@ -27,7 +27,7 @@ class PaletteInterfaceAspect
 
     /**
      * @Flow\Inject
-     * @var PackageManagerInterface
+     * @var PackageManager
      */
     protected $packageManager;
 
