@@ -102,7 +102,7 @@ class PaletteInterfaceAspect
     protected function createAndSetProfileOnProxy(PaletteInterface $proxy, $profilePath)
     {
         if (substr($profilePath, 0, 11) !== 'resource://') {
-            $profilePath = $this->packageManager->getPackage('imagine.imagine')->getPackagePath() . 'lib/Imagine/resources/' . $profilePath;
+            $profilePath = $this->packageManager->getPackage('imagine.imagine')->getPackagePath() . 'src/resources/' . $profilePath;
         }
         $profile = Profile::fromPath($profilePath);
         ObjectAccess::setProperty($proxy, 'profile', $profile, true);
