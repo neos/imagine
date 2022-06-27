@@ -1,5 +1,5 @@
 ===========================
-TYPO3 Imagine Documentation
+Neos Imagine Documentation
 ===========================
 
 *This version of the documentation has been rendered at:* |today|
@@ -7,7 +7,7 @@ TYPO3 Imagine Documentation
 Description
 ===========
 
-TYPO3 Imagine is wrapper package around the Imagine_ PHP library. The Imagine library offer advanced methods to
+Neos Imagine is wrapper package around the Imagine_ PHP library. The Imagine library offer advanced methods to
 manipulate images with an object oriented API.
 
 Change the default driver
@@ -31,7 +31,7 @@ ICC Profile support
 
 Imagine has support for ICC profile, you can change the default ICC profile by editing the following settings::
 
-    TYPO3:
+    Neos:
         Imagine:
             profile:
                 'RGB': 'color.org/sRGB_IEC61966-2-1_black_scaled.icc'
@@ -45,8 +45,7 @@ Use custom ICC profile
 
 You can use a profile located in your own package, with the following settings::
 
-    TYPO3:
+    Neos:
         Imagine:
             profile:
                 'RGB': 'resource://Your.Package/Private/Profile/my-custom-profile-rgb.icc'
-
