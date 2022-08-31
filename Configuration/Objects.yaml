@@ -1,2 +1,6 @@
 Imagine\Image\ImagineInterface:
   factoryObjectName: Neos\Imagine\ImagineFactory
+  factoryMethodName: createDriver
+  arguments:
+    1:
+      setting: Neos.Imagine.driver
